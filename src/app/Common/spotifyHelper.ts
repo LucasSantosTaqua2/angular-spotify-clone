@@ -1,4 +1,5 @@
 import { IUsuario } from "../Interfaces/IUsuario";
+import { IPlaylist } from "../Interfaces/IPlaylist";
 
 export function SpotifyUserParaUsuario(user: SpotifyApi.CurrentUsersProfileResponse): IUsuario {
     return {
@@ -6,4 +7,13 @@ export function SpotifyUserParaUsuario(user: SpotifyApi.CurrentUsersProfileRespo
         nome: user.display_name,
         imagemUrl: user.images.pop().url
     }
+}
+
+
+export function SpotifyPlaylistParaPlaylist (playlist: SpotifyApi.PlaylistObjectSimplified): IPlaylist{
+    return {
+        id: playlist.id,
+        nome: playlist.name,
+        imagemUrl: playlist.images.pop().url,
+    };
 }

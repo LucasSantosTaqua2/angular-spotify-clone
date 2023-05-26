@@ -7,6 +7,7 @@
         <app-botao-menu 
         [descricao]="'Home'"
         [selecionado]="menuSelecionado === 'Home'"
+        (click)="botaoClick('Home')"
         >
             <fa-icon [icon]="homeIcone"></fa-icon>
         </app-botao-menu>
@@ -14,6 +15,7 @@
         <app-botao-menu 
         [descricao]="'Pesquisar'"
         [selecionado]="menuSelecionado === 'Pesquisar'"
+        (click)="botaoClick('Pesquisar')"
         >
             <fa-icon [icon]="pesquisarIcone"></fa-icon>
         </app-botao-menu>
@@ -21,9 +23,29 @@
         <app-botao-menu 
         [descricao]="'Artistas'"
         [selecionado]="menuSelecionado === 'Artistas'"
+        (click)="botaoClick('Artistas')"
         >
             <fa-icon [icon]="artistaIcone"></fa-icon>
         </app-botao-menu>
+    </div>
+
+    <div class="menu-container flex">
+        <div class="playlist-titulo">
+            PLAYLISTS
+        </div>
+
+        <div class="playlist-scroll">
+            <app-botao-menu
+            *ngFor="let playlist of playlists"
+            [descricao]="playlist.nome"
+            [selecionado]="menuSelecionado === playlist.id"
+            (click)="botaoClick(playlist.id)"
+            >
+                <fa-icon 
+                [icon]="playlistIcone"
+                ></fa-icon>
+            </app-botao-menu>
+        </div>
     </div>
 </div>
 <div class="usuario-info">
