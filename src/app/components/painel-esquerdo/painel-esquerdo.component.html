@@ -34,7 +34,7 @@
             PLAYLISTS
         </div>
 
-        <div class="playlist-scroll">
+        <div class="playlists-scroll">
             <app-botao-menu
             *ngFor="let playlist of playlists"
             [descricao]="playlist.nome"
@@ -48,6 +48,7 @@
         </div>
     </div>
 </div>
-<div class="usuario-info">
 
+<div class="usuario-info">
+    <app-rodape-usuario></app-rodape-usuario>
 </div>
