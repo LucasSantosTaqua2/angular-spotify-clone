@@ -8,6 +8,7 @@ import { BotaoMenuComponent } from 'src/app/components/botao-menu/botao-menu.com
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RodapeUsuarioComponent } from 'src/app/components/rodape-usuario/rodape-usuario.component';
 import { HomeComponent } from '../home/home.component';
+import { TopArtistaComponent } from 'src/app/components/top-artista/top-artista.component';
 
 
 
@@ -18,6 +19,7 @@ import { HomeComponent } from '../home/home.component';
     BotaoMenuComponent,
     RodapeUsuarioComponent,
     HomeComponent,
+    TopArtistaComponent,
   ],
   imports: [
     CommonModule,
