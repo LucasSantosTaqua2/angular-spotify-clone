@@ -15,8 +15,9 @@ export class TopArtistaComponent implements OnInit {
   constructor(private spotifyService: SpotifyService) { }
 
   ngOnInit(): void {
+    this.buscarArtistas();
   }
-
+  
   async buscarArtistas(){
     const artistas = await this.spotifyService.buscarTopArtistas(1);
 
