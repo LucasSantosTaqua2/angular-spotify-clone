@@ -1,5 +1,8 @@
+@import 'variaveis.scss';
+
 :host {
     display: flex;
+    background-color: $cor-fundo;
 
     .rotas-container{
         display: block;

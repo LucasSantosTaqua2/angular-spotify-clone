@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IMusica } from 'src/app/Interfaces/IMusica';
 
 @Component({
   selector: 'app-painel-direito',
