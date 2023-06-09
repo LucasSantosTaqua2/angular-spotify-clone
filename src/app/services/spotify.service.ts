@@ -73,6 +73,13 @@ export class SpotifyService {
   return playlists.items.map(SpotifyPlaylistParaPlaylist);
  }
 
+ async buscarMusicasPlaylist(playlistId: string, offset = 0, limit = 50){
+  const playlistSpotify = await this.spotifyApi.getPlaylist(playlistId, {offset, limit});
+
+  if(!playlistSpotify)
+    return null;
+ }
+
  async buscarTopArtistas(limit = 10):Promise<IArtista[]>{
     const artistas = await this.spotifyApi.getMyTopArtists({limit});
     return artistas.items.map(SpotifyArtistaParaArtista);
@@ -91,6 +98,14 @@ export class SpotifyService {
  async obterMusicaAtual(): Promise<IMusica>{
   const musica = await this.spotifyApi.getMyCurrentPlayingTrack();
   return SpotifyTrackParaMusica(musica.item);
+ }
+
+ async voltarMusica(){
+  await this.spotifyApi.skipToPrevious();
+ }
+
+ async proximaMusica() {
+  await this.spotifyApi.skipToNext();
  }
 
  logout() {
