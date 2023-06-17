@@ -4,6 +4,7 @@ import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { newMusica } from 'src/app/Common/factories';
 import { IMusica } from 'src/app/Interfaces/IMusica';
+import { PlayerService } from 'src/app/services/player.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
 
 @Component({
@@ -20,19 +21,32 @@ export class ListaMusicaComponent implements OnInit, OnDestroy {
   musicaAtual: IMusica = newMusica();
   playIcone = faPlay;
 
+  title = '';
+
   subs: Subscription[] = [];
 
   constructor(
     private activedRoute : ActivatedRoute,
-    private spotifyService: SpotifyService
+    private spotifyService: SpotifyService,
+    private playerService: PlayerService,
+
     ) { }
 
   ngOnInit(): void {
     this.obterMusicas();
+    this.obterMusicaAtual();
   }
 
   ngOnDestroy(): void {
     this.subs.forEach(sub => sub.unsubscribe());
+  }
+
+  obterMusicaAtual(){
+    const sub = this.playerService.musicaAtual.subscribe(musica => {
+      this.musicaAtual = musica;
+    });
+
+    this.subs.push(sub);
   }
 
   obterMusicas() {
@@ -54,10 +68,27 @@ export class ListaMusicaComponent implements OnInit, OnDestroy {
   }
 
   async obterDadosPlaylist(playlistId: string){
-
+    const playlistMusicas = await this.spotifyService.buscarMusicasPlaylist(playlistId);
+    this.definirDadosPagina(playlistMusicas.nome, playlistMusicas.imagemUrl, playlistMusicas.musicas);
+    this.title = `Músicas Playlist: ${playlistMusicas.nome}`;
   }
 
   async obterDadosArtista(artistaId: string){
 
+  }
+
+  definirDadosPagina(bannerTexto: string, bannerImage: string, musicas: IMusica[]){
+    this.bannerTexto = bannerTexto;
+    this.bannerImagemUrl = bannerImage;
+    this.musicas = musicas;
+  }
+
+  async executarMusica(musica: IMusica){
+    await this.spotifyService.executarMusica(musica.id);
+    this.playerService.definirMusicaAtual(musica);
+  }
+
+  obterArtistas(musica: IMusica){
+    return musica.artistas.map(artista => artista.nome).join(', ');
   }
 }

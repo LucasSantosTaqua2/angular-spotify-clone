@@ -3,7 +3,7 @@ import { SpotifyConfiguration } from 'src/environments/environment';
 import Spotify from 'spotify-web-api-js';
 import { IUsuario } from '../Interfaces/IUsuario';
 import { InjectFlags } from '@angular/compiler/src/core';
-import { SpotifyArtistaParaArtista, SpotifyPlaylistParaPlaylist, SpotifyTrackParaMusica, SpotifyUserParaUsuario } from '../Common/spotifyHelper';
+import { SpotifyArtistaParaArtista, SpotifyPlaylistParaPlaylist, SpotifySinglePlaylistParaPlaylist, SpotifyTrackParaMusica, SpotifyUserParaUsuario } from '../Common/spotifyHelper';
 import { IPlaylist } from '../Interfaces/IPlaylist';
 import { Router } from '@angular/router';
 import { IArtista } from '../Interfaces/IArtista';
@@ -78,6 +78,12 @@ export class SpotifyService {
 
   if(!playlistSpotify)
     return null;
+
+  const playlist = SpotifySinglePlaylistParaPlaylist(playlistSpotify);
+
+  const musicasSpotfy = await this.spotifyApi.getPlaylistTracks(playlistId, {offset, limit});
+  playlist.musicas = musicasSpotfy.items.map(musica => SpotifyTrackParaMusica(musica.track as SpotifyApi.TrackObjectFull));
+  return playlist;
  }
 
  async buscarTopArtistas(limit = 10):Promise<IArtista[]>{

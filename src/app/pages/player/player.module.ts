@@ -16,6 +16,7 @@ import { TopArtistasComponent } from 'src/app/components/top-artistas/top-artist
 import { ArtistaItemImagemComponent } from 'src/app/components/artista-item-imagem/artista-item-imagem.component';
 import { PlayerCardComponent } from 'src/app/components/player-card/player-card.component';
 import { ListaMusicaComponent } from '../lista-musica/lista-musica.component';
+import { BannerComponent } from 'src/app/components/banner/banner.component';
 
 
 
@@ -33,6 +34,7 @@ import { ListaMusicaComponent } from '../lista-musica/lista-musica.component';
     BuscasRecentesComponent,
     ArtistaItemImagemComponent,
     PlayerCardComponent,
+    BannerComponent,
   ],
   imports: [
     CommonModule,
